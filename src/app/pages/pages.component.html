@@ -1,0 +1,26 @@
+<div class="page-wrapper">
+    <app-header></app-header>
+    <div class="container-fluid page-body-wrapper">
+        <app-sidebar></app-sidebar>
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="box-title">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h2 class="card-title">{{page_title}}</h2>
+                                </div>
+                                <div *ngIf="add_link != false" class="col-md-2 text-right">
+                                    <a routerLink="{{add_link}}" class="btn m-btn--square btn-success" href="#">Add New</a>
+                                </div>
+                            </div>
+                        </div>
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

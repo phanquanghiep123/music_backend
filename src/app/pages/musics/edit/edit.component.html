@@ -1,0 +1,97 @@
+<form (submit)="OnSubmit()" class="form-sample">
+  <div *ngIf="music.error" [innerHTML]="music.error" class="error-box"></div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Name</label>
+        <div class="col-sm-9">
+          <input [(ngModel)]="music.name" name="name" type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Artist</label>
+        <div class="col-sm-9">
+          <select [(ngModel)]="music.artist_id" name="artist_id" class="form-control">
+            <option value="0" selected>--choose artist--</option>
+            <option *ngFor="let item of artists" value="{{item.id}}">{{item.name}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Upload thumb</label>
+        <div class="col-sm-9">
+          <input type="file" #thumbFile name="thumbFile" class="artist-thumb file-upload-default" accept="image/*">
+          <div class="input-group col-xs-12">
+            <input type="text" [(ngModel)]="music.thumb" name="thumb" class="form-control file-upload-info" disabled="" placeholder="Upload thumb">
+            <span class="input-group-append">
+              <button onclick="return $('.artist-thumb').trigger('click');" class="file-upload-browse btn btn-info" type="button">Upload</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Upload file audio</label>
+        <div class="col-sm-9">
+          <input type="file" #pathFile name="pathFile" class="artist-path file-upload-default" accept="audio/*">
+          <div class="input-group col-xs-12">
+            <input type="text" [(ngModel)]="music.path" name="path" class="form-control file-upload-info" disabled="" placeholder="Upload file audio">
+            <span class="input-group-append">
+              <button onclick="return $('.artist-path').trigger('click');" class="file-upload-browse btn btn-info" type="button">Upload</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group row">
+        <div class="col-md-12">
+          <div class="row">
+            <label class="col-sm-3 col-form-label">Day of creation</label>
+            <div class="col-sm-9">
+              <input [owlDateTimeTrigger]="day_of_creation" [owlDateTime]="day_of_creation" [(ngModel)]="music.day_of_creation" name="day_of_creation" class="form-control datetimepicker"
+                placeholder="dd/mm/yyyy" autocomplete="off">
+              <owl-date-time [pickerType]="'calendar'" [pickerMode]="'dialog'" #day_of_creation></owl-date-time>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-12">
+          <div class="row">
+            <label class="col-sm-3 col-form-label">Status</label>
+            <div class="col-sm-9">
+               <select [(ngModel)]="music.status" name="status" class="form-control">
+                 <option value="0" selected>off</option>
+                 <option value="1">on</option>
+               </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Description</label>
+        <div class="col-sm-9">
+          <textarea [(ngModel)]="music.description" name="description" class="form-control"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center bottom-block">
+      <button type="submit" class="btn btn-success mr-2">Save</button>
+      <a (click)="goBack();" class="btn btn-light">Cancel</a>
+    </div>
+  </div>
+</form>

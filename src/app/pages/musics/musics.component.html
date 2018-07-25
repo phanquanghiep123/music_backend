@@ -1,0 +1,26 @@
+<div class="table-responsive">
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th> # </th>
+				<th> Name </th>
+				<th> Artist name </th>
+				<th> Thumb </th>
+				<th> Action </th>
+			</tr>
+		</thead>
+		<tbody *ngIf="musics">
+			<tr *ngFor="let item of musics; let i = index">
+				<td>{{i + 1}}</td>
+				<td>{{item.name}}</td>
+				<td>{{item.artist_name}}</td>
+				<td>
+					<img *ngIf="item.thumb != null" src="{{service.public_url + item.thumb}}">
+				</td>
+				<td class="action">
+					<a routerLink="edit/{{item.id}}" href="javascript:;"><span class="mdi mdi-calendar-edit"></span></a><a href="#"><span class="mdi mdi-delete-circle"></span></a>
+				 </td>
+			</tr>
+		</tbody>
+	</table>
+</div>

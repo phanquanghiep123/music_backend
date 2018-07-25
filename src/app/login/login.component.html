@@ -1,0 +1,82 @@
+<div class="container-scroller">
+  <div class="container-fluid page-body-wrapper full-page-wrapper auth-page">
+    <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
+      <div class="row w-100">
+        <div class="col-lg-4 mx-auto">
+          <div class="auto-form-wrapper">
+            <form (submit)="OnSubmit(formData)" #formData="ngForm">
+              <div *ngIf="loginForm.error" [innerHTML]="loginForm.error" class="error text-center"></div>
+              <div class="form-group">
+                <label class="label">Email
+                  <span *ngIf="email.invalid && isSubmit == 1" class="error-messege">
+                    (
+                      <span *ngIf="email.errors.required" class="error">email is required.</span>
+                      <span *ngIf="!email.errors.required && email.errors.email" class="error">email is incorrect</span>
+                    )
+                  </span>
+                </label>
+                <div class="input-group">
+                  <input [(ngModel)]="loginForm.email" ngModel #email="ngModel" type="email" name="email" class="form-control" placeholder="Email"
+                    required email>
+                  <div class="input-group-append">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-check-circle-outline"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="label">Password
+                  <span *ngIf="password.invalid && isSubmit == 1" class="error-messege">
+                    (
+                      <span *ngIf="password.errors.required" class="error">password is required.</span>
+                      <span *ngIf="!password.errors.required && password.errors.minlength" class="error">password must be at least 6.</span>
+                    )
+                  </span>
+                </label>
+                <div class="input-group">
+                  <input [(ngModel)]="loginForm.password" ngModel #password="ngModel" type="password" name="password" class="form-control"
+                    placeholder="*********" required minlength="6">
+                  <div class="input-group-append">
+                    <span class="input-group-text">
+                      <i class="mdi mdi-check-circle-outline"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary submit-btn btn-block">Login</button>
+              </div>
+              <div class="form-group d-flex justify-content-between">
+                <div class="form-check form-check-flat mt-0">
+                  <label class="form-check-label">
+                    <input type="checkbox" [(ngModel)]="loginForm.remember" ngModel name="remember" class="form-check-input" checked> Keep me signed in
+                  </label>
+                </div>
+                <a href="#" class="text-small forgot-password text-black">Forgot Password</a>
+              </div>
+              <div class="text-block text-center my-3">
+                <span class="text-small font-weight-semibold">Not a member ?</span>
+                <a href="register.html" class="text-black text-small">Create new account</a>
+              </div>
+            </form>
+          </div>
+          <ul class="auth-footer">
+            <li>
+              <a href="#">Conditions</a>
+            </li>
+            <li>
+              <a href="#">Help</a>
+            </li>
+            <li>
+              <a href="#">Terms</a>
+            </li>
+          </ul>
+          <p class="footer-text text-center">copyright © 2018 Bootstrapdash. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+    <!-- content-wrapper ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
+</div>

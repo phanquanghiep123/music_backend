@@ -1,0 +1,23 @@
+textarea {
+    min-height: 110px;
+}
+
+.example-trigger {
+    display: inline-block;
+}
+
+.line-bottom{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    color: #212537;
+    font-size: 18px;
+}
+.add-track{
+    position: absolute;
+    right: 7px;
+    top: 1px;
+    background-color: #00ce68;
+    color: #fff;
+    padding: 5px;
+}

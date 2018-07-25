@@ -1,0 +1,99 @@
+textarea {
+    min-height: 110px;
+}
+
+.example-trigger {
+    display: inline-block;
+}
+
+.line-bottom {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+    color: #212537;
+    font-size: 18px;
+}
+
+.add-track {
+    position: absolute;
+    right: 12px;
+    top: 1px;
+    background-color: #00ce68;
+    color: #fff;
+    padding: 5px;
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #f2f2f2;
+    border-radius: 0.3rem;
+    outline: 0;
+}
+
+.modal-dialog.modal-md {
+    width: 590px;
+    margin: 30px auto;
+    max-width: 100%;
+}
+
+.action {
+    position: absolute;
+    top: -6px;
+    right: 0;
+}
+
+.box-list-musics, .box-item {
+    width: 100%;
+    position: relative;
+    float: left;
+}
+
+.box-list-musics .action li {
+    list-style: none;
+    display: inline;
+}
+.box-item p {
+    margin: 0;
+    padding: 0;
+}
+.box-list-musics .action {
+    margin: 0;
+    padding: 0;
+}
+
+.is_play{
+    color: #ccc;
+}
+
+.box-list-musics{
+    border: 1px solid #f2f2f2;
+    border-top: none;
+    padding: 5px;
+    height: 533px;
+    padding-top: 15px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.box-item {
+    float: left;
+    width: 100%;
+    position: relative
+}
+
+
+ .thumb-track{
+    width: 50px;
+    object-fit: cover;
+    height: 50px;
+    margin-right: 20px;
+ }
+ .title-track{
+    font-size: 20px;
+ }

@@ -1,0 +1,9 @@
+.box-title {
+    padding: 0px 0;
+    margin-bottom: 60px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.box-title .card-title {
+    font-size: 30px;
+}
