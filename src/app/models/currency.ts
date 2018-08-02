@@ -4,4 +4,5 @@ export class Currency {
     value: string = '';
     description: string = '';
     icon: string = '';
+    price : number = 0;
 }

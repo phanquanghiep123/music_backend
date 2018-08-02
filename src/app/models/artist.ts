@@ -1,3 +1,4 @@
+import {Currency} from '../models/currency';
 export class Artist {
     id: number;
     name: string;
@@ -19,5 +20,5 @@ export class Artist {
     updated_at: string;
     error : false;
     bio: string;
-    price : object = null;
+    prices : Currency[] = null;
 }
