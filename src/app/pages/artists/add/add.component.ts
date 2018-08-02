@@ -20,6 +20,7 @@ export class AddComponent implements OnInit {
   service: Service;
   musics: Music[];
   isSubmit = 0;
+  controls = {};
   @ViewChild('avatarInput') avatarInput: ElementRef;
   constructor(
     private router: Router,
@@ -47,6 +48,7 @@ export class AddComponent implements OnInit {
   OnSubmit(formData) {
     this.isSubmit = 1;
     if (formData.form.status != 'VALID') {
+      this.controls = formData.form.controls;
       window.scrollTo(0, 0);
       return false;
     }
