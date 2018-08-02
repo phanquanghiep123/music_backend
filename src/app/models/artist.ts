@@ -19,6 +19,5 @@ export class Artist {
     updated_at: string;
     error : false;
     bio: string;
-    price : number;
-
+    price : object = null;
 }

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Music } from '../../../models/music';
 import { first } from 'rxjs/operators';
 import { AppComponent } from '../../../app.component';
+import { Currency } from '../../../models/currency';
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
@@ -19,6 +20,7 @@ export class AddComponent implements OnInit {
   artist: Artist;
   service: Service;
   musics: Music[];
+  currencys: Currency[];
   isSubmit = 0;
   @ViewChild('avatarInput') avatarInput: ElementRef;
   constructor(
@@ -33,11 +35,16 @@ export class AddComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.artist = new Artist();
-    setTimeout(() => {
+    this.artistService.create().subscribe(data => {
+      this.service = data;
+      if (this.service.status) {
+        this.currencys = this.service.response;
+        this.artist = new Artist();
+        this.app.loading = false;
+      }
+    }, error => {
       this.app.loading = false;
-    }, 200);
-
+    });
   }
   OnSubmit(formData) {
     this.isSubmit = 1;
@@ -58,7 +65,7 @@ export class AddComponent implements OnInit {
         }
       }
     }
-    this.artistService.add(from).pipe(first()).subscribe(
+    this.artistService.store(from).pipe(first()).subscribe(
       data => {
         this.service = data;
         if (this.service.status) {

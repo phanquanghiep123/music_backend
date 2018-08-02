@@ -25,7 +25,10 @@ export class ArtistService {
   get ($id : any = 0) : Observable<Service>{
     return this.http.post<Service>(Config.APIURL + this.controller + "/edit", {"id" : $id} , this.httpOptions);
   }
-  add($model: FormData): Observable<Service> {
+  create(): Observable<Service> {
+    return this.http.post<Service>(Config.APIURL + this.controller + "/create",[], this.httpOptions);
+  }
+  store($model: FormData): Observable<Service> {
     return this.http.post<Service>(Config.APIURL + this.controller + "/store", $model, this.httpOptions);
   }
   update ($model :FormData) : Observable<Service> {

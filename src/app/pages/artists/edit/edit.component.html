@@ -26,13 +26,26 @@
         </div>
         <div class="col-md-12">
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Price($) *</label>
+            <label class="col-sm-3 col-form-label">Price USD($) *</label>
             <div class="col-sm-9">
-              <input [(ngModel)]="artist.price" ngModel #price="ngModel" name="price" type="number" class="form-control" required number>
+              <input [(ngModel)]="artist.priceUSD" ngModel #priceUSD="ngModel" name="priceUSD" type="number" class="form-control" required number>
               <p>
-                <span *ngIf="price.invalid && isSubmitArtist == 1" class="error-messege">
-                  <span *ngIf="price.errors.required" class="error">price is required.</span>
-                  <span *ngIf="price.errors.number" class="error">price is number.</span>
+                <span *ngIf="priceUSD.invalid && isSubmitArtist == 1" class="error-messege">
+                  <span *ngIf="priceUSD.errors.required" class="error">price is required.</span>
+                  <span *ngIf="priceUSD.errors.number" class="error">price is number.</span>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Price INR(₹) *</label>
+            <div class="col-sm-9">
+              <input [(ngModel)]="artist.priceINR" ngModel #priceINR="ngModel" name="priceINR" type="number" class="form-control" required>
+              <p>
+                <span *ngIf="priceINR.invalid && isSubmit == 1" class="error-messege">
+                  <span *ngIf="priceINR.errors.required" class="error">Price INR is required.</span>
                 </span>
               </p>
             </div>
