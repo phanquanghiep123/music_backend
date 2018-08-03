@@ -27,6 +27,7 @@ export class EditComponent implements OnInit {
   UIMusics: any;
   isSubmitArtist = 1;
   isSubmitMusic = 0;
+  controls = {};
   typeTracks = [
     'Pop',
     'Rock',
@@ -74,6 +75,7 @@ export class EditComponent implements OnInit {
   OnSubmit(formArtist) {
     this.isSubmitArtist = 1;
     if (formArtist.form.status != 'VALID') {
+      this.controls = formArtist.form.controls;
       window.scrollTo(0, 0);
       return false;
     }
@@ -87,7 +89,13 @@ export class EditComponent implements OnInit {
         if (item == "date_of_birth" || item == "begin_date" || item == "end_date") {
           from.append(item, this.formatDate(this.artist[item]));
         } else {
-          from.append(item, this.artist[item]);
+          if(item == "prices"){
+            var json_prices = JSON.stringify(this.artist[item]);
+            from.append(item, json_prices);
+          }else{
+            from.append(item, this.artist[item]);
+          }
+          
         }
       }
     }

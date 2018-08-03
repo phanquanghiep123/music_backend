@@ -8,9 +8,9 @@
             <label class="col-sm-3 col-form-label">Name * </label>
             <div class="col-sm-9">
               <input [(ngModel)]="artist.name" ngModel #name="ngModel" name="name" type="text" class="form-control" required>
-              <p>
-                <span *ngIf="name.invalid && isSubmitArtist == 1" class="error-messege">
-                  <span *ngIf="name.errors.required" class="error">name is required.</span>
+              <p *ngIf="controls.name">
+                <span *ngIf="controls.name.errors != null && isSubmitArtist == 1" class="error-messege">
+                  <span *ngIf="controls.name.errors.required" class="error">name is required.</span>
                 </span>
               </p>
             </div>
@@ -24,20 +24,20 @@
             </div>
           </div>
         </div>
-        <div class="col-md-12">
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Price($) *</label>
-            <div class="col-sm-9">
-              <input [(ngModel)]="artist.price" ngModel #price="ngModel" name="price" type="number" class="form-control" required number>
-              <p>
-                <span *ngIf="price.invalid && isSubmitArtist == 1" class="error-messege">
-                  <span *ngIf="price.errors.required" class="error">price is required.</span>
-                  <span *ngIf="price.errors.number" class="error">price is number.</span>
-                </span>
-              </p>
+        <div class="col-md-12" *ngFor="let price of artist.prices; let i = index">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Price {{price.name}}* ({{price.icon}})</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="artist.prices[i].price" ngModel #price{{price.name}}="ngModel" name="price{{price.name}}" type="number" class="form-control" required>
+                <p *ngIf="controls[('price' + price.name)]">
+                  <span *ngIf=" isSubmitArtist == 1 && controls[('price' + price.name)].errors != null" class="error-messege">
+                    <span *ngIf="controls[('price'+price.name)].errors.required" class="error">Price {{price.name}} is required.</span>
+                    <span *ngIf="controls[('price'+price.name)].errors.number" class="error">Price {{price.name}} is number.</span>
+                  </span>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -50,9 +50,9 @@
                 <option value="female">Female</option>
                 <option value="other">Other</option>
               </select>
-              <p>
-                <span *ngIf="gender.invalid && isSubmitArtist == 1" class="error-messege">
-                  <span *ngIf="gender.errors.required" class="error">gender is required.</span>
+              <p *ngIf="controls.gender">
+                <span *ngIf="controls.gender.errors != null && isSubmitArtist == 1" class="error-messege">
+                  <span *ngIf="controls.gender.errors.required" class="error">gender is required.</span>
                 </span>
               </p>
             </div>
@@ -71,9 +71,9 @@
                 <option value="Character">Character</option>
                 <option value="Other">Other</option>
               </select>
-              <p>
-                <span *ngIf="type.invalid && isSubmitArtist == 1" class="error-messege">
-                  <span *ngIf="type.errors.required" class="error">type is required.</span>
+              <p *ngIf="controls.type">
+                <span *ngIf="controls.type.errors != null  && isSubmitArtist == 1" class="error-messege">
+                  <span *ngIf="controls.type.errors.required" class="error">type is required.</span>
                 </span>
               </p>
             </div>

@@ -8,7 +8,7 @@ export class Artist {
     content : string;
     avatar : any = '';
     public_avatar : any = '';
-    avatarFile : File;
+    avatarFile : any;
     area : string;
     type : string = '';
     slug: string;

@@ -61,7 +61,12 @@ export class AddComponent implements OnInit {
         if (item == "date_of_birth" || item == "begin_date" || item == "end_date") {
           from.append(item, this.formatDate(this.artist[item]));
         } else {
-          from.append(item, this.artist[item]);
+          if(item == "prices"){
+            var json_prices = JSON.stringify(this.artist[item]);
+            from.append(item, json_prices);
+          }else{
+            from.append(item, this.artist[item]);
+          }
         }
       }
     }
