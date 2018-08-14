@@ -3,34 +3,28 @@
   <div class=" row">
     <div class="col-md-6">
       <div class="row">
-        <div class="col-md-12">
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Name * </label>
-            <div class="col-sm-9">
-              <input [(ngModel)]="artist.name" ngModel #name="ngModel" name="name" type="text" class="form-control" required>
-              <p *ngIf="controls.name">
-                <span *ngIf="controls.name.errors != null && isSubmitArtist == 1" class="error-messege">
-                  <span *ngIf="controls.name.errors.required" class="error">name is required.</span>
-                </span>
-              </p>
+        <div class=" row">
+          <div class="col-md-12">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Artist name *</label>
+              <div class="col-sm-9">
+                <input [(ngModel)]="artist.name" ngModel #name="ngModel" name="name" type="text" class="form-control" required>
+                <p *ngIf="controls.name">
+                  <span *ngIf=" isSubmit == 1 && controls.name.errors != null" class="error-messege">
+                    <span *ngIf="controls.name.errors.required" class="error">name is required.</span>
+                  </span>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-12">
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Sort Name</label>
-            <div class="col-sm-9">
-              <input [(ngModel)]="artist.sort_name" name="sort_name" type="text" class="form-control">
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12" *ngFor="let price of artist.prices; let i = index">
+          <div class="col-md-12" *ngFor="let price of artist.prices; let i = index">
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">Price {{price.name}}* ({{price.icon}})</label>
               <div class="col-sm-9">
-                <input [(ngModel)]="artist.prices[i].price" ngModel #price{{price.name}}="ngModel" name="price{{price.name}}" type="number" class="form-control" required>
+                <input [(ngModel)]="artist.prices[i].price" ngModel #price{{price.name}}="ngModel" name="price{{price.name}}" type="text"
+                  class="form-control" required>
                 <p *ngIf="controls[('price' + price.name)]">
-                  <span *ngIf=" isSubmitArtist == 1 && controls[('price' + price.name)].errors != null" class="error-messege">
+                  <span *ngIf=" isSubmit == 1 && controls[('price' + price.name)].errors != null" class="error-messege">
                     <span *ngIf="controls[('price'+price.name)].errors.required" class="error">Price {{price.name}} is required.</span>
                     <span *ngIf="controls[('price'+price.name)].errors.number" class="error">Price {{price.name}} is number.</span>
                   </span>
@@ -38,109 +32,35 @@
               </div>
             </div>
           </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Gender *</label>
-            <div class="col-sm-9">
-              <select [(ngModel)]="artist.gender" ngModel #gender="ngModel" name="gender" class="form-control">
-                <option value="">-- choose gender --</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-              </select>
-              <p *ngIf="controls.gender">
-                <span *ngIf="controls.gender.errors != null && isSubmitArtist == 1" class="error-messege">
-                  <span *ngIf="controls.gender.errors.required" class="error">gender is required.</span>
-                </span>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Type *</label>
-            <div class="col-sm-9">
-              <select [(ngModel)]="artist.type" ngModel #type="ngModel" name="type" class="form-control">
-                <option value="">-- choose type --</option>
-                <option value="Person">Person</option>
-                <option value="Group">Group</option>
-                <option value="Orchestra">Orchestra</option>
-                <option value="Choir">Orchestra</option>
-                <option value="Character">Character</option>
-                <option value="Other">Other</option>
-              </select>
-              <p *ngIf="controls.type">
-                <span *ngIf="controls.type.errors != null  && isSubmitArtist == 1" class="error-messege">
-                  <span *ngIf="controls.type.errors.required" class="error">type is required.</span>
-                </span>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Begin date</label>
-            <div class="col-sm-9">
-              <input bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" [(ngModel)]="artist.begin_date" name="begin_date" class="form-control datetimepicker"
-                placeholder="dd-mm-yyyy" autocomplete="off">
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">End date</label>
-            <div class="col-sm-9">
-              <input bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" [(ngModel)]="artist.end_date" name="end_date" class="form-control datetimepicker"
-                placeholder="dd-mm-yyyy" autocomplete="off">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Date of birth</label>
-                <div class="col-sm-9">
-                  <input bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" [(ngModel)]="artist.date_of_birth" name="date_of_birth"
-                    class="form-control datetimepicker" placeholder="dd-mm-yyyy" autocomplete="off">
-                </div>
+          <div class="col-md-12">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Creation date</label>
+              <div class="col-sm-9">
+                <input bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" [(ngModel)]="artist.begin_date" name="begin_date" class="form-control datetimepicker"
+                  placeholder="dd-mm-yyyy" autocomplete="off">
               </div>
             </div>
-            <div class="col-md-12">
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Area</label>
-                <div class="col-sm-9">
-                  <input [(ngModel)]="artist.area" name="area" type="text" class="form-control">
-                </div>
-              </div>
-            </div>
-            <div class="col-md-12 ">
-              <div class="form-group row">
-                <label class="col-sm-3 col-form-label">Avatar</label>
-                <div class="col-sm-9">
-                  <input (change)="changThumbartists($event)" type="file" #avatarInput class="artist-avatar file-upload-default" accept="image/*">
-                  <div class="col-xs-12">
-                    <p *ngIf="artist.avatar">
-                      <img [src]="artist.public_avatar" src="#" class="thumb-artist" style="margin-bottom: 10px;">
-                    </p>
-                    <button onclick="return $('.artist-avatar').trigger('click');" class="file-upload-browse btn btn-info" type="button">Upload</button>
-                  </div>
+          </div>
+          <div class="col-md-12 ">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Avatar</label>
+              <div class="col-sm-9">
+                <input (change)="changThumbartists($event)" type="file" #avatarInput class="artist-avatar file-upload-default" accept="image/*">
+                <div class="col-xs-12">
+                  <p *ngIf="artist.avatar">
+                    <img [src]="artist.public_avatar" src="#" class="thumb-artist" style="margin-bottom: 10px;">
+                  </p>
+                  <button onclick="return $('.artist-avatar').trigger('click');" class="file-upload-browse btn btn-info" type="button">Upload</button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-12">
-          <div class="form-group row">
-            <label class="col-sm-3 col-form-label">Biography</label>
-            <div class="col-sm-9">
-              <textarea [(ngModel)]="artist.bio" name="bio" class="form-control"></textarea>
+          <div class="col-md-12">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">About artist</label>
+              <div class="col-sm-9">
+                <textarea [(ngModel)]="artist.bio" name="bio" class="form-control"></textarea>
+              </div>
             </div>
           </div>
         </div>
@@ -195,8 +115,8 @@
   <div class="modal-dialog modal-md">
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header">
-        Add Track
+      <div *ngIf="music" class="modal-header">
+        {{ (music.id == 0) ?  'Add Track' : 'Edit Track Details'}}
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
@@ -206,7 +126,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Name *</label>
+                  <label class="col-sm-3 col-form-label">Track name *</label>
                   <div class="col-sm-9">
                     <input [(ngModel)]="music.name" ngModel #name="ngModel" name="name" type="text" class="form-control" required>
                     <p *ngIf="name.invalid && isSubmitMusic == 1" class="error-messege">
@@ -217,21 +137,18 @@
               </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Type *</label>
-                    <div class="col-sm-9">
-                      <select  [(ngModel)]="music.type" ngModel #type="ngModel" name="type" class="form-control" required>
-                        <option value="">-- choose type --</option>
-                        <option *ngFor="let type of typeTracks" value="{{type}}">{{type}}</option>
-                      </select>
-                      <p *ngIf="type.invalid && isSubmitMusic == 1" class="error-messege">
-                        <span *ngIf="type.errors.required" class="error">type is required.</span>
-                      </p>
-                    </div>
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Genre *</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control file-upload-info" ngModel #genre="ngModel" [(ngModel)]="music.genre" name="Gende" required>
+                    <p *ngIf="genre.invalid && isSubmitMusic == 1" class="error-messege">
+                      <span *ngIf="genre.errors.required" class="error">genre is required.</span>
+                    </p>
                   </div>
                 </div>
               </div>
+            </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group row">
@@ -284,7 +201,7 @@
                 <div class="form-group row">
                   <div class="col-md-12">
                     <div class="row">
-                      <label class="col-sm-3 col-form-label">Day of creation</label>
+                      <label class="col-sm-3 col-form-label">Date of creation</label>
                       <div class="col-sm-9">
                         <input placeholder="Datepicker" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" [(ngModel)]="music.day_of_creation"
                           name="day_of_creation" class="form-control" placeholder="dd-mm-yyyy" autocomplete="off">
@@ -295,22 +212,11 @@
                 <div class="form-group row">
                   <div class="col-md-12">
                     <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Description</label>
+                      <label class="col-sm-3 col-form-label">Track information</label>
                       <div class="col-sm-9">
                         <textarea [(ngModel)]="music.description" name="description" class="form-control"></textarea>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="row">
-                  <label class="col-sm-3 col-form-label">Status</label>
-                  <div class="col-sm-9">
-                    <select [(ngModel)]="music.status" name="status" class="form-control">
-                      <option value="0">off</option>
-                      <option value="1">on</option>
-                    </select>
                   </div>
                 </div>
               </div>

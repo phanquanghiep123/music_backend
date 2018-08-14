@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Music } from '../../../models/music';
 import { first } from 'rxjs/operators';
 import { AppComponent } from '../../../app.component';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
@@ -27,7 +28,8 @@ export class AddComponent implements OnInit {
     private location: Location,
     private pagesComponent: PagesComponent,
     private artistService: ArtistService,
-    private app: AppComponent
+    private app: AppComponent,
+    public sanitizer: DomSanitizer
   ) {
     this.pagesComponent.add_link = this.add_link;
     this.pagesComponent.page_title = this.page_title;
@@ -103,14 +105,13 @@ export class AddComponent implements OnInit {
   changThumbartists(event) {
     var target = event.target || event.srcElement || event.currentTarget;
     var file = target.files[0];
-    var _this = this;
     // Make sure `file.name` matches our extensions criteria
     if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
-      var reader = new FileReader();
-      reader.addEventListener("load", function () {
-        _this.artist.avatar = this.result;
-      }, false);
-      reader.readAsDataURL(file);
+      var URL = window.URL ;
+      this.artist.avatar = this.sanitize(URL.createObjectURL(file));
     }
+  }
+  sanitize(url:string){
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 }

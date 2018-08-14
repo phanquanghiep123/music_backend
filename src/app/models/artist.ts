@@ -1,6 +1,6 @@
 import {Currency} from '../models/currency';
 export class Artist {
-    id: number;
+    id: number = 0;
     name: string;
     sort_name : string;
     gender    : string ='';

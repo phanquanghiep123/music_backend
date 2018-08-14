@@ -1,6 +1,7 @@
 export class Music {
-    id: number;
+    id: number = 0;
     name: string;
+    genre: string;
     artist_id: number = 0;
     artist_name: string;
     description: string;
@@ -18,6 +19,6 @@ export class Music {
     created_at: string;
     updated_at: string;
     error: false;
-    is_play : boolean = false;
-    type : string = '';
+    is_play: boolean = false;
+    type: string = '';
 }
