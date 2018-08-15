@@ -1,0 +1,33 @@
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th> # </th>
+        <th> Invoice ID </th>
+        <th> Full name </th>
+        <th> Email </th>
+        <th> Payment option </th>
+        <th> Status </th>
+        <th> Price </th>
+        <th> Created at </th>
+      </tr>
+    </thead>
+    <tbody *ngIf="invoices">
+      <tr *ngFor="let item of invoices | paginate: { id: 'server', itemsPerPage:service.limit, currentPage: service.next, totalItems: service.total} ;let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{item.invoice_id}}</td>
+        <td>{{item.full_name}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.payment_option}}</td>
+        <td>{{statusInvoice[item.status]}}</td>
+        <td>{{item.price}}</td>
+        <td>{{item.created_at}}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>
+
+<div class="has-text-centered" style="margin-top: 40px;">
+    <div class="col-md-12 text-center"><pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls></div>
+</div>

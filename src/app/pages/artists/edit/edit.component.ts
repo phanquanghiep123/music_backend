@@ -44,6 +44,7 @@ export class EditComponent implements OnInit {
     'Lovers'
   ]
   @ViewChild('pathFile') pathFile: ElementRef;
+  @ViewChild('pathexFile') pathexFile: ElementRef;
   @ViewChild('thumbFile') thumbFile: ElementRef;
   @ViewChild('avatarInput') avatarInput: ElementRef;
   constructor(
@@ -129,6 +130,8 @@ export class EditComponent implements OnInit {
         from.append("pathFile", this.pathFile.nativeElement.files[0]);
       } else if (item == "thumb") {
         from.append("thumbFile", this.thumbFile.nativeElement.files[0]);
+      }else if(item == "pathex"){
+        from.append("pathexFile", this.pathexFile.nativeElement.files[0]);
       }
       else {
         if (item == "day_of_creation") {
@@ -140,6 +143,7 @@ export class EditComponent implements OnInit {
     }
     this.music.pathFile = this.pathFile.nativeElement.files[0];
     this.music.thumbFile = this.thumbFile.nativeElement.files[0];
+    this.music.pathexFile = this.pathexFile.nativeElement.files[0];
     if (this.music.id > 0) {
       this.musicService.update(from).subscribe(
         data => {
@@ -197,6 +201,7 @@ export class EditComponent implements OnInit {
       this.music = music;
       this.music.public_thumb = this.service.public_url + this.music.thumb;
       this.music.public_path = this.service.public_url + this.music.path;
+      this.music.public_pathex = this.service.public_url + this.music.pathex;
       this.isSubmitMusic = 1;
     }, 200);
   }
@@ -261,6 +266,7 @@ export class EditComponent implements OnInit {
       this.artist.public_avatar = this.sanitize(URL.createObjectURL(file));
     }
   }
+
   changThumbmusic(event) {
     var target = event.target || event.srcElement || event.currentTarget;
     var file = target.files[0];
@@ -269,6 +275,12 @@ export class EditComponent implements OnInit {
       var URL = window.URL ;
       this.music.public_thumb = this.sanitize(URL.createObjectURL(file));    
     }
+  }
+  changAudiomusicex(event) {
+    var target = event.target || event.srcElement || event.currentTarget;
+    var file = target.files[0];
+    var URL = window.URL ;
+    this.music.public_pathex = this.sanitize(URL.createObjectURL(file));  
   }
   changAudiomusic(event) {
     var target = event.target || event.srcElement || event.currentTarget;

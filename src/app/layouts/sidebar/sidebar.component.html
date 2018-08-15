@@ -1,10 +1,10 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
-        <li class="nav-item nav-profile">
+        <!--<li class="nav-item nav-profile">
             <div class="nav-link">
                 <div class="user-wrapper">
                     <div class="profile-image">
-                        <img src="/assets/images/faces/face1.jpg" alt="profile image">
+                        <img src="assets/images/faces/face1.jpg" alt="profile image">
                     </div>
                     <div class="text-wrapper">
                         <p class="profile-name">Richard V.Welsh</p>
@@ -18,9 +18,9 @@
                     <i class="mdi mdi-plus"></i>
                 </button>
             </div>
-        </li>
+        </li>-->
         <li class="nav-item">
-            <a routerLink="/dashboard" class="nav-link" href="index.html">
+            <a routerLink="/dashboard" class="nav-link" data-href="/dashboard">
                 <i class="menu-icon mdi mdi-television"></i>
                 <span class="menu-title">Dashboard</span>
             </a>
@@ -41,6 +41,13 @@
                     </li>
                 </ul>
             </div>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/invoices" class="nav-link" data-href="/invoices">
+                <i class="menu-icon mdi mdi-cart"></i>
+                <span class="menu-title">Invocies</span>
+            </a>
+            
         </li>
     </ul>
 </nav>

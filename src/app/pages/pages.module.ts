@@ -10,8 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { ArtistsComponent } from './artists/artists.component';
 import { ArtistsModule } from './artists/artists.module';
-import { MusicsModule } from './musics/musics.module';
-
+import { InvoicesModule } from './invoices/invoices.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,7 +18,7 @@ import { MusicsModule } from './musics/musics.module';
     HttpClientModule,
     HttpModule,
     ArtistsModule,
-    MusicsModule
+    InvoicesModule
   ],
   declarations: [
     PagesComponent,

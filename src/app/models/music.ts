@@ -8,9 +8,12 @@ export class Music {
     thumb: any = "";
     public_thumb: any = "";
     public_path: any = "";
+    public_pathex: any = "";
     path: any = "";
+    pathex: any = "";
     thumbFile: File;
     pathFile: File;
+    pathexFile : File;
     slug: string;
     day_of_creation: string;
     status: number = 0;

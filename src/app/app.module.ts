@@ -14,7 +14,6 @@ import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingComponent } from './layouts/loading/loading.component';
-
 @NgModule({
   declarations: [
     AppComponent,
