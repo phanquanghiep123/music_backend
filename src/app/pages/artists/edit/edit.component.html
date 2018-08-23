@@ -112,11 +112,11 @@
   </div>
 </form>
 <div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-md">
+  <div class="modal-dialog modal-lg" style="width:1366px;max-width:100%;">
     <!-- Modal content-->
     <div class="modal-content">
       <div *ngIf="music" class="modal-header">
-        {{ (music.id == 0) ?  'Add Track' : 'Edit Track Details'}}
+        {{ (music.id == 0) ? 'Add Track' : 'Edit Track Details'}}
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
@@ -124,7 +124,7 @@
           <div *ngIf="music">
             <div *ngIf="music.error" [innerHTML]="music.error" class="error-box"></div>
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Track name *</label>
                   <div class="col-sm-8">
@@ -135,22 +135,139 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Genre *</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control file-upload-info" ngModel #genre="ngModel" [(ngModel)]="music.genre" name="Gende" required>
+                    <input type="text" class="form-control file-upload-info" ngModel #genre="ngModel" [(ngModel)]="music.genre" name="Gende"
+                      required>
                     <p *ngIf="genre.invalid && isSubmitMusic == 1" class="error-messege">
                       <span *ngIf="genre.errors.required" class="error">genre is required.</span>
                     </p>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Upload file audio sample*</label>
+                  <div class="col-sm-8">
+                    <input (change)="changAudiomusicex($event)" [required]="!music.pathex" type="file" #pathexFile #pathex="ngModel" ngModel
+                      name="pathex" class="artist-pathex file-upload-default" accept="audio/*" required>
+                    <div *ngIf="!music.public_pathex" class="input-group col-xs-12">
+                      <input class="form-control file-upload-info" disabled="" name="thumb" placeholder="Upload audio track sample" type="text">
+                      <span class="input-group-append">
+                        <button onclick="return $('.artist-pathex').trigger('click');" class="file-upload-browse btn btn-info" type="button">Upload</button>
+                      </span>
+                    </div>
+                    <p *ngIf="pathex.invalid && isSubmitMusic == 1 && !music.pathex" class="error-messege">
+                      <span *ngIf="pathex.errors.required" class="error">file audio sample is required.</span>
+                    </p>
+                    <div *ngIf="music.public_pathex">
+                      <div class="row">
+                        <div class="col-sm-8">
+                          <audio [src]="music.public_pathex" src="#" class="audio-music" controls></audio>
+                        </div>
+                        <div class="col-sm-4 right text-right">
+                          <button onclick="return $('.artist-pathex').trigger('click');" class="file-upload-browse btn btn-info" type="button">Upload</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Upload file audio *</label>
+                  <div class="col-sm-8">
+                    <input (change)="changAudiomusic($event)" [required]="!music.path" type="file" #pathFile #path="ngModel" ngModel name="path"
+                      class="artist-path file-upload-default" accept="audio/*" required>
+                    <div *ngIf="!music.public_path" class="input-group col-xs-12">
+                      <input class="form-control file-upload-info" disabled="" name="thumb" placeholder="Upload audio track" type="text">
+                      <span class="input-group-append">
+                        <button onclick="return $('.artist-path').trigger('click');" class="file-upload-browse btn btn-info" type="button">Upload</button>
+                      </span>
+                    </div>
+                    <p *ngIf="path.invalid && isSubmitMusic == 1 && !music.path" class="error-messege">
+                      <span *ngIf="path.errors.required" class="error">file audio is required.</span>
+                    </p>
+                    <div *ngIf="music.public_path">
+                      <div class="row">
+                        <div class="col-sm-8">
+                          <audio [src]="music.public_path" src="#" class="audio-music" controls></audio>
+                        </div>
+                        <div class="col-sm-4 right text-right">
+                          <button onclick="return $('.artist-path').trigger('click');" class="file-upload-browse btn btn-info" type="button">Upload</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Extended version*</label>
+                  <div class="col-sm-8">
+                    <input (change)="changAudioextended($event)" [required]="!music.pathextended" type="file" #pathExtendedFile #pathextended="ngModel"
+                      ngModel name="pathextended" class="artist-pathextended file-upload-default" accept="audio/*" required>
+                    <div *ngIf="!music.public_pathextended" class="input-group col-xs-12">
+                      <input class="form-control file-upload-info" disabled="" name="public_pathextended" placeholder="Upload audio extended version"
+                        type="text">
+                      <span class="input-group-append">
+                        <button onclick="return $('.artist-pathextended').trigger('click');" class="file-upload-browse btn btn-info" type="button">Upload</button>
+                      </span>
+                    </div>
+                    <p *ngIf="pathextended.invalid && isSubmitMusic == 1 && !music.pathextended" class="error-messege">
+                      <span *ngIf="pathextended.errors.required" class="error">file audio extended version is required.</span>
+                    </p>
+                    <div *ngIf="music.public_pathextended">
+                      <div class="row">
+                        <div class="col-sm-8">
+                          <audio [src]="music.public_pathextended" src="#" class="audio-music" controls></audio>
+                        </div>
+                        <div class="col-sm-4 right text-right">
+                          <button onclick="return $('.artist-pathextended').trigger('click');" class="file-upload-browse btn btn-info" type="button">Upload</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">PDF download</label>
+                  <div class="col-sm-8">
+                    <input (change)="changfilePDF($event)" type="file" #pathPDFFile #pathpdf="ngModel" ngModel name="pathpdf" class="artist-pathpdf file-upload-default"
+                      accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf">
+                    <div *ngIf="!music.public_pathpdf" class="input-group col-xs-12">
+                      <input class="form-control file-upload-info" disabled="" name="public_pathpdf" placeholder="Upload PDF download" type="text">
+                      <span class="input-group-append">
+                        <button onclick="return $('.artist-pathpdf').trigger('click');" class="file-upload-browse btn btn-info" type="button">Upload</button>
+                      </span>
+                    </div>
+                    <div *ngIf="music.public_pathpdf">
+                      <div class="row">
+                        <div class="col-sm-8">
+                          <a [href]="music.public_pathpdf" target="_blank">Read more file</a>
+                        </div>
+                        <div class="col-sm-4 right text-right">
+                          <button onclick="return $('.artist-pathpdf').trigger('click');" class="file-upload-browse btn btn-info" type="button">Upload</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="row form-group">
+                  <label class="col-sm-4 col-form-label">Date of creation</label>
+                  <div class="col-sm-8">
+                    <input placeholder="Datepicker" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" [(ngModel)]="music.day_of_creation"
+                      name="day_of_creation" class="form-control" placeholder="dd-mm-yyyy" autocomplete="off">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
                 <div class="form-group row">
                   <label class="col-sm-4 col-form-label">Upload thumb</label>
                   <div class="col-sm-8">
@@ -163,85 +280,27 @@
                       </span>
                     </div>
                     <div *ngIf="music.public_thumb">
-                      <p>
-                        <img [src]="music.public_thumb" src="#" class="thumb-music" style="margin-bottom: 10px;">
-                      </p>
-                      <button onclick="return $('.artist-thumb').trigger('click');" class="file-upload-browse btn btn-info" type="button">Upload</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">Upload file audio sample*</label>
-                  <div class="col-sm-8">
-                    <input (change)="changAudiomusicex($event)" [required]="!music.pathex" type="file" #pathexFile #pathex="ngModel" ngModel name="pathex" class="artist-pathex file-upload-default" accept="audio/*" required>
-                    <div *ngIf="!music.public_pathex" class="input-group col-xs-12">
-                      <input class="form-control file-upload-info" disabled="" name="thumb" placeholder="Upload audio track sample" type="text">
-                      <span class="input-group-append">
-                        <button onclick="return $('.artist-pathex').trigger('click');" class="file-upload-browse btn btn-info" type="button">Upload</button>
-                      </span>
-                    </div>
-                    <p *ngIf="pathex.invalid && isSubmitMusic == 1 && !music.pathex" class="error-messege">
-                      <span *ngIf="pathex.errors.required" class="error">file audio sample is required.</span>
-                    </p>
-                    <div *ngIf="music.public_pathex">
-                      <p>
-                        <audio [src]="music.public_pathex" src="#" class="audio-music" controls></audio>
-                      </p>
-                      <button onclick="return $('.artist-pathex').trigger('click');" class="file-upload-browse btn btn-info" type="button">Upload</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label">Upload file audio *</label>
-                  <div class="col-sm-8">
-                    <input (change)="changAudiomusic($event)" [required]="!music.path" type="file" #pathFile #path="ngModel" ngModel name="path" class="artist-path file-upload-default" accept="audio/*" required>
-                    <div *ngIf="!music.public_path" class="input-group col-xs-12">
-                      <input class="form-control file-upload-info" disabled="" name="thumb" placeholder="Upload audio track" type="text">
-                      <span class="input-group-append">
-                        <button onclick="return $('.artist-path').trigger('click');" class="file-upload-browse btn btn-info" type="button">Upload</button>
-                      </span>
-                    </div>
-                    <p *ngIf="path.invalid && isSubmitMusic == 1 && !music.path" class="error-messege">
-                      <span *ngIf="path.errors.required" class="error">file audio is required.</span>
-                    </p>
-                    <div *ngIf="music.public_path">
-                      <p>
-                        <audio [src]="music.public_path" src="#" class="audio-music" controls></audio>
-                      </p>
-                      <button onclick="return $('.artist-path').trigger('click');" class="file-upload-browse btn btn-info" type="button">Upload</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group row">
-                  <div class="col-md-12">
-                    <div class="row">
-                      <label class="col-sm-4 col-form-label">Date of creation</label>
-                      <div class="col-sm-8">
-                        <input placeholder="Datepicker" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }" [(ngModel)]="music.day_of_creation"
-                          name="day_of_creation" class="form-control" placeholder="dd-mm-yyyy" autocomplete="off">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-md-12">
-                    <div class="form-group row">
-                      <label class="col-sm-4 col-form-label">Track information</label>
-                      <div class="col-sm-8">
-                        <textarea [(ngModel)]="music.description" name="description" class="form-control"></textarea>
+                      <div class="row">
+                        <div class="col-sm-8">
+                            <a [href]="music.public_thumb" target="_blank">Read more image</a>
+                        </div>
+                        <div class="col-sm-4 text-right">
+                          <button onclick="return $('.artist-thumb').trigger('click');" class="file-upload-browse btn btn-info" type="button">Upload</button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Track information</label>
+                  <div class="col-sm-8">
+                    <textarea [(ngModel)]="music.description" name="description" class="form-control"></textarea>
+                  </div>
+                </div>
+              </div>
+
             </div>
             <div class="row">
               <div class="col-md-12 text-center bottom-block">

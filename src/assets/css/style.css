@@ -21587,3 +21587,8 @@ img {
 }
 /*!custom css*/
 /*# sourceMappingURL=maps/style.css.map */
+.right{float: right;}
+.left{float: left;}
+audio{
+    max-width: 100%;
+}

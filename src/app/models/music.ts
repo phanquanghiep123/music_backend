@@ -9,11 +9,17 @@ export class Music {
     public_thumb: any = "";
     public_path: any = "";
     public_pathex: any = "";
+    public_pathextended : any = "";
+    public_pathpdf : any = "";
     path: any = "";
     pathex: any = "";
+    pathextended : any = "";
+    pathpdf : any = "";
     thumbFile: File;
     pathFile: File;
     pathexFile : File;
+    pathExtendedFile : File;
+    pathPDFFile : File;
     slug: string;
     day_of_creation: string;
     status: number = 0;
@@ -24,4 +30,5 @@ export class Music {
     error: false;
     is_play: boolean = false;
     type: string = '';
+    
 }

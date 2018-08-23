@@ -47,6 +47,8 @@ export class EditComponent implements OnInit {
   @ViewChild('pathexFile') pathexFile: ElementRef;
   @ViewChild('thumbFile') thumbFile: ElementRef;
   @ViewChild('avatarInput') avatarInput: ElementRef;
+  @ViewChild('pathExtendedFile') pathExtendedFile: ElementRef;
+  @ViewChild('pathPDFFile') pathPDFFile: ElementRef;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -81,7 +83,6 @@ export class EditComponent implements OnInit {
       return false;
     }
     this.app.loading = true;
-    var $: any;
     let from = new FormData();
     for (let item in this.artist) {
       if (item == "avatar") {
@@ -90,13 +91,13 @@ export class EditComponent implements OnInit {
         if (item == "date_of_birth" || item == "begin_date" || item == "end_date") {
           from.append(item, this.formatDate(this.artist[item]));
         } else {
-          if(item == "prices"){
+          if (item == "prices") {
             var json_prices = JSON.stringify(this.artist[item]);
             from.append(item, json_prices);
-          }else{
+          } else {
             from.append(item, this.artist[item]);
           }
-          
+
         }
       }
     }
@@ -130,8 +131,12 @@ export class EditComponent implements OnInit {
         from.append("pathFile", this.pathFile.nativeElement.files[0]);
       } else if (item == "thumb") {
         from.append("thumbFile", this.thumbFile.nativeElement.files[0]);
-      }else if(item == "pathex"){
+      } else if (item == "pathex") {
         from.append("pathexFile", this.pathexFile.nativeElement.files[0]);
+      } else if (item == "pathextended") {
+        from.append("pathExtendedFile", this.pathExtendedFile.nativeElement.files[0]);
+      } else if (item == "pathpdf") {
+        from.append("pathPDFFile", this.pathPDFFile.nativeElement.files[0]);
       }
       else {
         if (item == "day_of_creation") {
@@ -144,6 +149,8 @@ export class EditComponent implements OnInit {
     this.music.pathFile = this.pathFile.nativeElement.files[0];
     this.music.thumbFile = this.thumbFile.nativeElement.files[0];
     this.music.pathexFile = this.pathexFile.nativeElement.files[0];
+    this.music.pathPDFFile = this.pathPDFFile.nativeElement.files[0];
+    this.music.pathExtendedFile = this.pathExtendedFile.nativeElement.files[0];
     if (this.music.id > 0) {
       this.musicService.update(from).subscribe(
         data => {
@@ -169,7 +176,13 @@ export class EditComponent implements OnInit {
         data => {
           this.service = data;
           if (this.service.status) {
-            this.musics.push(this.service.response);
+            this.music = this.service.response;
+            this.music.public_thumb = this.service.public_url + this.music.thumb;
+            this.music.public_path = this.service.public_url + this.music.path;
+            this.music.public_pathex = this.service.public_url + this.music.pathex;
+            this.music.public_pathextended = this.service.public_url + this.music.pathextended;
+            this.music.public_pathpdf = this.service.public_url + this.music.pathpdf;
+            this.musics.push(this.music);
             $("#myModal").modal("hide");
           }
           this.app.loading = false;
@@ -199,9 +212,11 @@ export class EditComponent implements OnInit {
     }
     setTimeout(() => {
       this.music = music;
-      this.music.public_thumb = this.service.public_url + this.music.thumb;
-      this.music.public_path = this.service.public_url + this.music.path;
-      this.music.public_pathex = this.service.public_url + this.music.pathex;
+      this.music.public_thumb = (this.music.thumb) ? this.service.public_url + this.music.thumb : null;
+      this.music.public_path = (this.music.path) ? this.service.public_url + this.music.path : null;
+      this.music.public_pathex = (this.music.pathex) ? this.service.public_url + this.music.pathex : null;
+      this.music.public_pathextended = (this.music.pathextended) ?  this.service.public_url + this.music.pathextended : null;
+      this.music.public_pathpdf = (this.music.pathpdf) ? this.service.public_url + this.music.pathpdf : null;
       this.isSubmitMusic = 1;
     }, 200);
   }
@@ -262,37 +277,49 @@ export class EditComponent implements OnInit {
     var file = target.files[0];
     // Make sure `file.name` matches our extensions criteria
     if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
-      var URL = window.URL ;
+      var URL = window.URL;
       this.artist.public_avatar = this.sanitize(URL.createObjectURL(file));
     }
   }
 
+  changAudioextended(event) {
+    var target = event.target || event.srcElement || event.currentTarget;
+    var file = target.files[0];
+    var URL = window.URL;
+    this.music.public_pathextended = this.sanitize(URL.createObjectURL(file));
+  }
+  changfilePDF(event) {
+    var target = event.target || event.srcElement || event.currentTarget;
+    var file = target.files[0];
+    var URL = window.URL;
+    this.music.public_pathpdf = this.sanitize(URL.createObjectURL(file));
+  }
   changThumbmusic(event) {
     var target = event.target || event.srcElement || event.currentTarget;
     var file = target.files[0];
     // Make sure `file.name` matches our extensions criteria
     if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
-      var URL = window.URL ;
-      this.music.public_thumb = this.sanitize(URL.createObjectURL(file));    
+      var URL = window.URL;
+      this.music.public_thumb = this.sanitize(URL.createObjectURL(file));
     }
   }
   changAudiomusicex(event) {
     var target = event.target || event.srcElement || event.currentTarget;
     var file = target.files[0];
-    var URL = window.URL ;
-    this.music.public_pathex = this.sanitize(URL.createObjectURL(file));  
+    var URL = window.URL;
+    this.music.public_pathex = this.sanitize(URL.createObjectURL(file));
   }
   changAudiomusic(event) {
     var target = event.target || event.srcElement || event.currentTarget;
     var file = target.files[0];
-    var URL = window.URL ;
-    this.music.public_path = this.sanitize(URL.createObjectURL(file));  
+    var URL = window.URL;
+    this.music.public_path = this.sanitize(URL.createObjectURL(file));
   }
   reset() {
     this.thumbFile.nativeElement.value = '';
     this.pathFile.nativeElement.value = '';
   }
-  sanitize(url:string){
+  sanitize(url: string) {
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 }
